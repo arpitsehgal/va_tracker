@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.min.js"></script>
+    <title>Resizable Columns Table</title>
+    <style>
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* Ensures column resizing applies consistently */
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left; /* Left-aligned */
+            vertical-align: top; /* Top-aligned */
+            overflow: hidden; /* Prevent content overflow */
+        }
+        th {
+            position: relative;
+        }
+        /* Resizer element for resizing columns */
+        th .resizer {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            cursor: col-resize;
+            background-color: transparent;
+        }
+
+        .mdl-layout__header {
+            background-color: #808080; /* Grey */
+        }
+        .mdl-layout-title {
+            font-size: 2rem;
+            font-weight: none;
+            color: white;
+            text-align: center;
+            width: 100%;
+            display: block;
+        }
+        /* Make rows clickable */
+        tbody tr {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title">Products tracker</span>
+                <div class="mdl-layout-spacer"></div>
+            </div>
+        </header>
+        <main class="mdl-layout__content">
+            <div class="page-content" style="padding: 0px;"><br>
+                <!-- Add New Entry Button -->
+                <form action="/add_entry" method="GET" style="margin-bottom: 20px; width:900px;">
+                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                        Add New Entry
+                    </button>
+                </form>
+
+                <!-- Resizable Columns Table -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product<div class="resizer"></div></th>
+                            <th>Title<div class="resizer"></div></th>
+                            <th>Document Type<div class="resizer"></div></th>
+                            <th>Reference Number<div class="resizer"></div></th>
+                            <th>Status<div class="resizer"></div></th>
+                            <th>Number of Pages<div class="resizer"></div></th>
+                            <th>Date of Publication<div class="resizer"></div></th>
+                            <th>Price<div class="resizer"></div></th>
+                            <th>Date Assigned<div class="resizer"></div></th>
+                            <th>Author/Contact<div class="resizer"></div></th>
+                            <th>Purpose<div class="resizer"></div></th>
+                            <th>Num<div class="resizer"></div></th>
+                            <th>VA Team Member<div class="resizer"></div></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in data %}
+                        <tr onclick="window.location.href='/edit/{{ entry.id }}'">
+                            <td>{{ entry.product }}</td>
+                            <td>{{ entry.title }}</td>
+                            <td>{{ entry.document_type }}</td>
+                            <td>{{ entry.reference_number }}</td>
+                            <td>{{ entry.status }}</td>
+                            <td>{{ entry.number_of_pages }}</td>
+                            <td>{{ entry.date_of_publication }}</td>
+                            <td>${{ entry.price }}</td>
+                            <td>{{ entry.date_assigned }}</td>
+                            <td>{{ entry.author_contact }}</td>
+                            <td>{{ entry.purpose }}</td>
+                            <td>{{ entry.num }}</td>
+                            <td>{{ entry.va_team_member }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script>
+        const table = document.querySelector('table');
+        const resizers = document.querySelectorAll('.resizer');
+
+        resizers.forEach((resizer, index) => {
+            resizer.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                const startX = e.pageX;
+                const startWidth = table.rows[0].cells[index].offsetWidth;
+
+                function onMouseMove(e) {
+                    const newWidth = startWidth + (e.pageX - startX);
+                    table.rows[0].cells[index].style.width = `${newWidth}px`;
+                    Array.from(table.rows).forEach(row => {
+                        row.cells[index].style.width = `${newWidth}px`;
+                    });
+                }
+
+                function onMouseUp() {
+                    document.removeEventListener('mousemove', onMouseMove);
+                    document.removeEventListener('mouseup', onMouseUp);
+                }
+
+                document.addEventListener('mousemove', onMouseMove);
+                document.addEventListener('mouseup', onMouseUp);
+            });
+        });
+    </script>
+</body>
+</html>

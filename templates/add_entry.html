@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <title>Add New Entry</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #ffffff; /* Solid white background */
+            color: #333;
+        }
+    
+        .mdl-card {
+            width: 75%; /* Widened the card by 25% */
+            max-width: 900px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+    
+        .mdl-card__title {
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+    
+        .field-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    
+        .field-container label {
+            flex: 0 0 30%;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #555;
+            padding-left: 10px;
+        }
+    
+        .field-container input,
+        .field-container select {
+            flex: 1;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: #fafafa;
+        }
+    
+        .field-container input:focus,
+        .field-container select:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+            outline: none;
+        }
+    
+       
+        .mdl-button--submit {
+            width: 69%; /* Match the width of input fields */
+            padding: 12px 15px; /* Consistent padding */
+            font-size: 1rem; /* Consistent font size */
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.2;
+            background: #2575fc;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-left: 260px;
+            transition: background 0.3s, transform 0.2s;
+        }
+        
+        .mdl-button--submit:active {
+            transform: scale(0.98);
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+    </style>
+    
+    
+    
+</head>
+<body>
+    <div class="mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Add New Entry</h2>
+        </div>
+        <form action="/add_entry" method="POST">
+
+            <!-- Title -->
+            <div class="field-container">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title">
+            </div>
+
+      <!-- Product Dropdown -->
+      <div class="field-container">
+        <label for="product">Product:</label>
+        <select id="product" name="product" onchange="updateReferenceNumber()" required>
+            <option value="" disabled selected>Select a Product</option>
+            <!-- Product options dynamically added -->
+            <option value="Advanced SciTech">Advanced SciTech</option>
+            <option value="Amazon Web Services (AWS)">Amazon Web Services (AWS)</option>
+            <option value="Application Services">Application Services</option>
+            <option value="Artificial Intelligence (AI)">Artificial Intelligence (AI)</option>
+            <option value="Asset and Wealth Management">Asset and Wealth Management</option>
+            <option value="Banking and Financial Services Business Process">Banking and Financial Services Business Process</option>
+            <option value="Banking and Financial Services Information Technology">Banking and Financial Services Information Technology</option>
+            <option value="Catalyst™">Catalyst™</option>
+            <option value="CXM Technology">CXM Technology</option>
+            <option value="Cloud and Infrastructure">Cloud and Infrastructure</option>
+            <option value="Clinical Development Technology">Clinical Development Technology</option>
+            <option value="Contingent Staffing">Contingent Staffing</option>
+            <option value="Contingent Workforce Management">Contingent Workforce Management</option>
+            <option value="Conversational AI">Conversational AI</option>
+            <option value="Cross BPS">Cross BPS</option>
+            <option value="Customer Experience Management (CXM) Services">Customer Experience Management (CXM) Services</option>
+            <option value="Cybersecurity">Cybersecurity</option>
+            <option value="CX Excellence">CX Excellence</option>
+            <option value="Data and Analytics">Data and Analytics</option>
+            <option value="Digital Engineering Services">Digital Engineering Services</option>
+            <option value="Digital Services">Digital Services</option>
+            <option value="Digital Workplace">Digital Workplace</option>
+            <option value="Employee Experience Management (EXM) Platforms">Employee Experience Management (EXM) Platforms</option>
+            <option value="Engineering Research and Development">Engineering Research and Development</option>
+            <option value="Engineering Services">Engineering Services</option>
+            <option value="Enterprise Platform Services">Enterprise Platform Services</option>
+            <option value="Executive Insights">Executive Insights</option>
+            <option value="Executive Insights - BPS">Executive Insights - BPS</option>
+            <option value="Executive Insights - ITS">Executive Insights - ITS</option>
+            <option value="Exponential Technologies">Exponential Technologies</option>
+            <option value="Financial Crime and Compliance Operations">Financial Crime and Compliance Operations</option>
+            <option value="Financial Services Technology (FinTech)">Financial Services Technology (FinTech)</option>
+            <option value="Finance and Accounting">Finance and Accounting</option>
+            <option value="Forces & Foresight">Forces & Foresight</option>
+            <option value="GBS/SS Talent Excellence">GBS/SS Talent Excellence</option>
+            <option value="Global Business Services">Global Business Services</option>
+            <option value="Google Cloud">Google Cloud</option>
+            <option value="Healthcare and Life Sciences BPS">Healthcare and Life Sciences BPS</option>
+            <option value="Healthcare Business Process">Healthcare Business Process</option>
+            <option value="Healthcare Information Technology">Healthcare Information Technology</option>
+            <option value="HealthTech">HealthTech</option>
+            <option value="Human Resources">Human Resources</option>
+            <option value="Interactive Experience (IX) Services">Interactive Experience (IX) Services</option>
+            <option value="Insurance Business Process">Insurance Business Process</option>
+            <option value="Insurance Information Technology">Insurance Information Technology</option>
+            <option value="Insurance Technology (InsurTech)">Insurance Technology (InsurTech)</option>
+            <option value="Insurance Third-Party Administration (TPA) Services">Insurance Third-Party Administration (TPA) Services</option>
+            <option value="Intelligent Document Processing (IDP)">Intelligent Document Processing (IDP)</option>
+            <option value="IT Services Excellence">IT Services Excellence</option>
+            <option value="IT Talent Excellence">IT Talent Excellence</option>
+            <option value="Locations Insider™">Locations Insider™</option>
+            <option value="Life Sciences Business Process">Life Sciences Business Process</option>
+            <option value="Life Sciences Commercial Technologies">Life Sciences Commercial Technologies</option>
+            <option value="Life Sciences Information Technology">Life Sciences Information Technology</option>
+            <option value="Managed Service Providers (MSP)">Managed Service Providers (MSP)</option>
+            <option value="Market Vista™">Market Vista™</option>
+            <option value="Marketing Services">Marketing Services</option>
+            <option value="Microsoft Azure">Microsoft Azure</option>
+            <option value="Modern Application Development (MAD)">Modern Application Development (MAD)</option>
+            <option value="Mortgage Operations">Mortgage Operations</option>
+            <option value="Multi-country Payroll">Multi-country Payroll</option>
+            <option value="Multi-Line">Multi-Line</option>
+            <option value="Network Services and 5G">Network Services and 5G</option>
+            <option value="Oracle Services">Oracle Services</option>
+            <option value="Outsourcing Excellence">Outsourcing Excellence</option>
+            <option value="Pricing">Pricing</option>
+            <option value="Pricing Analytics as a Service">Pricing Analytics as a Service</option>
+            <option value="Process Mining">Process Mining</option>
+            <option value="Process Orchestration">Process Orchestration</option>
+            <option value="Procurement and Supply Chain">Procurement and Supply Chain</option>
+            <option value="Recruitment">Recruitment</option>
+            <option value="Retirement Technologies">Retirement Technologies</option>
+            <option value="Revenue Cycle Management">Revenue Cycle Management</option>
+            <option value="Retail and CPG Information Technology">Retail and CPG Information Technology</option>
+            <option value="SAP Services">SAP Services</option>
+            <option value="Service Optimization Technologies">Service Optimization Technologies</option>
+            <option value="Software Product Engineering Services">Software Product Engineering Services</option>
+            <option value="Supply Chain Management (SCM) Services">Supply Chain Management (SCM) Services</option>
+            <option value="Sustainability Technology and Services">Sustainability Technology and Services</option>
+            <option value="Technology Skills and Talent">Technology Skills and Talent</option>
+            <option value="Trust and Safety">Trust and Safety</option>
+            <option value="Value and Quality Assurance (VQA)">Value and Quality Assurance (VQA)</option>
+            <option value="Work at Home Agent (WAHA) Customer Experience Management (CXM)">Work at Home Agent (WAHA) Customer Experience Management (CXM)</option>
+            
+        </select>
+    </div>
+
+            <!-- Document Type Dropdown -->
+            <div class="field-container">
+                <label for="document_type">Document Type:</label>
+                <select id="document_type" name="document_type" required>
+                    <option value="" disabled selected>Select Document Type</option>
+                    <option value="Report">Report</option>
+                    <option value="Viewpoint">Viewpoint</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!-- Reference Number -->
+            <div class="field-container">
+                <label for="reference_number">Reference Number:</label>
+                <input type="text" id="reference_number" name="reference_number" readonly>
+            </div>
+
+            <!-- Date Assigned -->
+            <div class="field-container">
+                <label for="date_assigned">Date Assigned:</label>
+                <input type="date" id="date_assigned" name="date_assigned">
+            </div>
+
+            <!-- Date of Publication -->
+            <div class="field-container">
+                <label for="date_of_publication">Date of Publication:</label>
+                <input type="date" id="date_of_publication" name="date_of_publication">
+            </div>
+
+             <!-- Status -->
+             <div class="field-container">
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="" disabled selected>Select status</option>
+                    <option value="Complete">Complete</option>
+                    <option value="In progress">In progress</option>
+                </select>
+            </div>
+
+            <!-- Number of Pages -->
+            <div class="field-container">
+                <label for="number_of_pages">Number of Pages:</label>
+                <input type="number" id="number_of_pages" name="number_of_pages">
+            </div>
+
+            <!-- Price -->
+            <div class="field-container">
+                <label for="price">Price:</label>
+                <input type="text" id="price" name="price">
+            </div>
+
+
+            <!-- Author/Contact -->
+            <div class="field-container">
+                <label for="author_contact">Author/Contact:</label>
+                <input type="text" id="author_contact" name="author_contact">
+            </div>
+
+            <!-- Purpose -->
+            <div class="field-container">
+                <label for="purpose">Purpose:</label>
+                <select id="purpose" name="purpose" required>
+                    <option value="Product">Product</option>
+                </select>
+            </div>
+
+            <!-- Num 
+            <div class="field-container">
+                <label for="num">Num:</label>
+                <input type="number" id="num" name="num" required>
+            </div> -->
+
+            <!-- VA Team Member -->
+            <div class="field-container">
+                <label for="va_team_member">VA Team Member:</label>
+                <input type="text" id="va_team_member" name="va_team_member">
+            </div>
+
+            <!-- Submit Button -->
+            <div class="button-container">
+                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--submit">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const referenceData = {
+            "Healthcare and Life Sciences BPS": {
+                "Report": "EGR-2025-20-R-XXXX",
+                "Viewpoint": "EGR-2025-20-V-XXXX",
+                "Other": "N/A"
+            },
+            "Multi-Line": {
+                "Report": "EGR-2025-0-R-XXXX",
+                "Viewpoint": "EGR-2025-0-V-XXXX",
+                "Other": "N/A"
+            },
+            "CXM Technology": {
+                "Report": "EGR-2025-21-R-XXXX",
+                "Viewpoint": "EGR-2025-21-V-XXXX",
+                "Other": "N/A"
+            },
+            "Customer Experience Management (CXM) Services": {
+                "Report": "EGR-2025-21-R-XXXX",
+                "Viewpoint": "EGR-2025-21-V-XXXX",
+                "Other": "N/A"
+            },
+            "Conversational AI": {
+                "Report": "EGR-2025-21-R-XXXX",
+                "Viewpoint": "EGR-2025-21-V-XXXX",
+                "Other": "N/A"
+            },
+            "Work at Home Agent (WAHA) Customer Experience Management (CXM)": {
+                "Report": "EGR-2025-21-R-XXXX",
+                "Viewpoint": "EGR-2025-21-V-XXXX",
+                "Other": "N/A"
+            },
+            "Procurement and Supply Chain": {
+                "Report": "EGR-2025-22-R-XXXX",
+                "Viewpoint": "EGR-2025-22-V-XXXX",
+                "Other": "N/A"
+            },
+            "Supply Chain Management (SCM) Services": {
+                "Report": "EGR-2025-22-R-XXXX",
+                "Viewpoint": "EGR-2025-22-V-XXXX",
+                "Other": "N/A"
+            },
+            "Finance and Accounting": {
+                "Report": "EGR-2025-23-R-XXXX",
+                "Viewpoint": "EGR-2025-23-V-XXXX",
+                "Other": "N/A"
+            },
+            "Employee Experience Management (EXM) Platforms": {
+                "Report": "EGR-2025-24-R-XXXX",
+                "Viewpoint": "EGR-2025-24-V-XXXX",
+                "Other": "N/A"
+            },
+            "Multi-country Payroll": {
+                "Report": "EGR-2025-24-R-XXXX",
+                "Viewpoint": "EGR-2025-24-V-XXXX",
+                "Other": "N/A"
+            },
+            "Employer of Record (EOR)": {
+                "Report": "EGR-2025-24-R-XXXX",
+                "Viewpoint": "EGR-2025-24-V-XXXX",
+                "Other": "N/A"
+            },
+            "Rewards and Recognition": {
+                "Report": "EGR-2025-24-R-XXXX",
+                "Viewpoint": "EGR-2025-24-V-XXXX",
+                "Other": "N/A"
+            },
+            "Human Resources": {
+                "Report": "EGR-2025-24-R-XXXX",
+                "Viewpoint": "EGR-2025-24-V-XXXX",
+                "Other": "N/A"
+            },
+            "Contingent Workforce Management": {
+                "Report": "EGR-2025-25-R-XXXX",
+                "Viewpoint": "EGR-2025-25-V-XXXX",
+                "Other": "N/A"
+            },
+            "Managed Service Providers (MSP)": {
+                "Report": "EGR-2025-25-R-XXXX",
+                "Viewpoint": "EGR-2025-25-V-XXXX",
+                "Other": "N/A"
+            },
+            "Recruitment": {
+                "Report": "EGR-2025-26-R-XXXX",
+                "Viewpoint": "EGR-2025-26-V-XXXX",
+                "Other": "N/A"
+            },
+            "Mortgage Operations": {
+            "Report": "EGR-2025-27-R-XXXX",
+            "Viewpoint": "EGR-2025-27-V-XXXX",
+            "Other": "N/A"
+        },
+        "Banking and Financial Services Business Process": {
+            "Report": "EGR-2025-27-R-XXXX",
+            "Viewpoint": "EGR-2025-27-V-XXXX",
+            "Other": "N/A"
+        },
+        "Insurance Third-Party Administration (TPA) Services": {
+            "Report": "EGR-2025-28-R-XXXX",
+            "Viewpoint": "EGR-2025-28-V-XXXX",
+            "Other": "N/A"
+        },
+        "Insurance Business Process": {
+            "Report": "EGR-2025-28-R-XXXX",
+            "Viewpoint": "EGR-2025-28-V-XXXX",
+            "Other": "N/A"
+        },
+        "Microsoft Azure": {
+            "Report": "EGR-2025-29-R-XXXX",
+            "Viewpoint": "EGR-2025-29-V-XXXX",
+            "Other": "N/A"
+        },
+        "Amazon Web Services (AWS)": {
+            "Report": "EGR-2025-29-R-XXXX",
+            "Viewpoint": "EGR-2025-29-V-XXXX",
+            "Other": "N/A"
+        },
+        "Google Cloud": {
+            "Report": "EGR-2025-29-R-XXXX",
+            "Viewpoint": "EGR-2025-29-V-XXXX",
+            "Other": "N/A"
+        },
+        "Network Services and 5G": {
+            "Report": "EGR-2025-29-R-XXXX",
+            "Viewpoint": "EGR-2025-29-V-XXXX",
+            "Other": "N/A"
+        },
+        "Cloud and Infrastructure": {
+            "Report": "EGR-2025-29-R-XXXX",
+            "Viewpoint": "EGR-2025-29-V-XXXX",
+            "Other": "N/A"
+        },
+        "Financial Services Technology (FinTech)": {
+            "Report": "EGR-2025-31-R-XXXX",
+            "Viewpoint": "EGR-2025-31-V-XXXX",
+            "Other": "N/A"
+        },
+        "Asset and Wealth Management": {
+            "Report": "EGR-2025-31-R-XXXX",
+            "Viewpoint": "EGR-2025-31-V-XXXX",
+            "Other": "N/A"
+        },
+        "Banking and Financial Services Information Technology": {
+            "Report": "EGR-2025-31-R-XXXX",
+            "Viewpoint": "EGR-2025-31-V-XXXX",
+            "Other": "N/A"
+        },
+        "Value and Quality Assurance (VQA)": {
+            "Report": "EGR-2025-32-R-XXXX",
+            "Viewpoint": "EGR-2025-32-V-XXXX",
+            "Other": "N/A"
+        },
+        "Modern Application Development (MAD)": {
+            "Report": "EGR-2025-32-R-XXXX",
+            "Viewpoint": "EGR-2025-32-V-XXXX",
+            "Other": "N/A"
+        },
+        "Application Services": {
+            "Report": "EGR-2025-32-R-XXXX",
+            "Viewpoint": "EGR-2025-32-V-XXXX",
+            "Other": "N/A"
+        },
+        "Digital Services": {
+            "Report": "EGR-2025-33-R-XXXX",
+            "Viewpoint": "EGR-2025-33-V-XXXX",
+            "Other": "N/A"
+        },
+        "Exponential Technologies": {
+            "Report": "EGR-2025-33-R-XXXX",
+            "Viewpoint": "EGR-2025-33-V-XXXX",
+            "Other": "N/A"
+        },
+        "Catalyst™": {
+            "Report": "EGR-2025-34-R-XXXX",
+            "Viewpoint": "EGR-2025-34-V-XXXX",
+            "Other": "N/A"
+        },
+        "Market Vista™": {
+            "Report": "EGR-2025-35-R-XXXX",
+            "Viewpoint": "EGR-2025-35-V-XXXX",
+            "Other": "N/A"
+        },
+        "Locations Insider™": {
+            "Report": "EGR-2025-37-R-XXXX",
+            "Viewpoint": "EGR-2025-37-V-XXXX",
+            "Other": "N/A"
+        },
+        "Process Orchestration": {
+            "Report": "EGR-2025-38-R-XXXX",
+            "Viewpoint": "EGR-2025-38-V-XXXX",
+            "Other": "N/A"
+        },
+        "Intelligent Document Processing (IDP)": {
+            "Report": "EGR-2025-38-R-XXXX",
+            "Viewpoint": "EGR-2025-38-V-XXXX",
+            "Other": "N/A"
+        },
+        "Service Optimization Technologies": {
+            "Report": "EGR-2025-38-R-XXXX",
+            "Viewpoint": "EGR-2025-38-V-XXXX",
+            "Other": "N/A"
+        },
+        "Process Mining": {
+            "Report": "EGR-2025-38-R-XXXX",
+            "Viewpoint": "EGR-2025-38-V-XXXX",
+            "Other": "N/A"
+        },
+        "Executive Insights": {
+            "Report": "EGR-2025-39-R-XXXX",
+            "Viewpoint": "EGR-2025-39-V-XXXX",
+            "Other": "N/A"
+        },
+        "Executive Insights - ITS": {
+            "Report": "EGR-2025-39-R-XXXX",
+            "Viewpoint": "EGR-2025-39-V-XXXX",
+            "Other": "N/A"
+        },
+        "Executive Insights - BPS": {
+            "Report": "EGR-2025-39-R-XXXX",
+            "Viewpoint": "EGR-2025-39-V-XXXX",
+            "Other": "N/A"
+        },
+        "Digital Engineering Services": {
+            "Report": "EGR-2025-40-R-XXXX",
+            "Viewpoint": "EGR-2025-40-V-XXXX",
+            "Other": "N/A"
+        },
+        "Healthcare Information Technology": {
+            "Report": "EGR-2025-45-R-XXXX",
+            "Viewpoint": "EGR-2025-45-V-XXXX",
+            "Other": "N/A"
+        },
+        "Software Product Engineering Services": {
+            "Report": "EGR-2025-40-R-XXXX",
+            "Viewpoint": "EGR-2025-40-V-XXXX",
+            "Other": "N/A"
+        },
+        "Engineering Services": {
+            "Report": "EGR-2025-40-R-XXXX",
+            "Viewpoint": "EGR-2025-40-V-XXXX",
+            "Other": "N/A"
+        },
+        "Retirement Technologies": {
+            "Report": "EGR-2025-41-R-XXXX",
+            "Viewpoint": "EGR-2025-41-V-XXXX",
+            "Other": "N/A"
+        },
+        "Insurance Information Technology": {
+            "Report": "EGR-2025-41-R-XXXX",
+            "Viewpoint": "EGR-2025-41-V-XXXX",
+            "Other": "N/A"
+        },
+        "Insurance Technology (InsurTech)": {
+            "Report": "EGR-2025-41-R-XXXX",
+            "Viewpoint": "EGR-2025-41-V-XXXX",
+            "Other": "N/A"
+        },
+        "Outsourcing Excellence": {
+            "Report": "EGR-2025-43-R-XXXX",
+            "Viewpoint": "EGR-2025-43-V-XXXX",
+            "Other": "N/A"
+        },
+        "Data and Analytics": {
+            "Report": "EGR-2025-44-R-XXXX",
+            "Viewpoint": "EGR-2025-44-V-XXXX",
+            "Other": "N/A"
+        },
+        "HealthTech": {
+            "Report": "EGR-2025-45-R-XXXX",
+            "Viewpoint": "EGR-2025-45-V-XXXX",
+            "Other": "N/A"
+        },
+        "Life Sciences Information Technology": {
+            "Report": "EGR-2025-46-R-XXXX",
+            "Viewpoint": "EGR-2025-46-V-XXXX",
+            "Other": "N/A"
+        },
+        "Life Sciences Commercial Technologies": {
+            "Report": "EGR-2025-46-R-XXXX",
+            "Viewpoint": "EGR-2025-46-V-XXXX",
+            "Other": "N/A"
+        },
+        "Pricing": {
+            "Report": "EGR-2025-47-R-XXXX",
+            "Viewpoint": "EGR-2025-47-V-XXXX",
+            "Other": "N/A"
+        },
+        "SAP Services": {
+            "Report": "EGR-2025-50-R-XXXX",
+            "Viewpoint": "EGR-2025-50-V-XXXX",
+            "Other": "N/A"
+        },
+        "Oracle Services": {
+            "Report": "EGR-2025-50-R-XXXX",
+            "Viewpoint": "EGR-2025-50-V-XXXX",
+            "Other": "N/A"
+        },
+        "Enterprise Platform Services": {
+            "Report": "EGR-2025-50-R-XXXX",
+            "Viewpoint": "EGR-2025-50-V-XXXX",
+            "Other": "N/A"
+        },
+        "Healthcare Business Process": {
+            "Report": "EGR-2025-53-R-XXXX",
+            "Viewpoint": "EGR-2025-53-V-XXXX",
+            "Other": "N/A"
+        },
+        "Revenue Cycle Management": {
+            "Report": "EGR-2025-53-R-XXXX",
+            "Viewpoint": "EGR-2025-53-V-XXXX",
+            "Other": "N/A"
+        },
+        "Life Sciences Business Process": {
+            "Report": "EGR-2025-54-R-XXXX",
+            "Viewpoint": "EGR-2025-54-V-XXXX",
+            "Other": "N/A"
+        },
+        "Marketing Services": {
+            "Report": "EGR-2025-55-R-XXXX",
+            "Viewpoint": "EGR-2025-55-V-XXXX",
+            "Other": "N/A"
+        },
+        "Global Business Services": {
+            "Report": "EGR-2025-56-R-XXXX",
+            "Viewpoint": "EGR-2025-56-V-XXXX",
+            "Other": "N/A"
+        },
+        "GBS/SS Talent Excellence": {
+            "Report": "EGR-2025-59-R-XXXX",
+            "Viewpoint": "EGR-2025-59-V-XXXX",
+            "Other": "N/A"
+        },
+        "IT Talent Excellence": {
+            "Report": "EGR-2025-60-R-XXXX",
+            "Viewpoint": "EGR-2025-60-V-XXXX",
+            "Other": "N/A"
+        },
+        "T": {
+            "Report": "EGR-2025-61-R-XXXX",
+            "Viewpoint": "EGR-2025-61-V-XXXX",
+            "Other": "N/A"
+        },
+        "Technology Skills and Talent": {
+            "Report": "EGR-2025-61-R-XXXX",
+            "Viewpoint": "EGR-2025-61-V-XXXX",
+            "Other": "N/A"
+        },
+        "Cross BPS": {
+            "Report": "EGR-2025-62-R-XXXX",
+            "Viewpoint": "EGR-2025-62-V-XXXX",
+            "Other": "N/A"
+        },
+        "IT Services Excellence": {
+            "Report": "EGR-2025-63-R-XXXX",
+            "Viewpoint": "EGR-2025-63-V-XXXX",
+            "Other": "N/A"
+        },
+        "Interactive Experience (IX) Services": {
+            "Report": "EGR-2025-64-R-XXXX",
+            "Viewpoint": "EGR-2025-64-V-XXXX",
+            "Other": "N/A"
+        },
+        "Cybersecurity": {
+            "Report": "EGR-2025-65-R-XXXX",
+            "Viewpoint": "EGR-2025-65-V-XXXX",
+            "Other": "N/A"
+        },
+        "Digital Workplace": {
+            "Report": "EGR-2025-66-R-XXXX",
+            "Viewpoint": "EGR-2025-66-V-XXXX",
+            "Other": "N/A"
+        },
+        "Trust and Safety": {
+            "Report": "EGR-2025-67-R-XXXX",
+            "Viewpoint": "EGR-2025-67-V-XXXX",
+            "Other": "N/A"
+        },
+        "Contingent Staffing": {
+            "Report": "EGR-2025-68-R-XXXX",
+            "Viewpoint": "EGR-2025-68-V-XXXX",
+            "Other": "N/A"
+        },
+        "CX Excellence": {
+            "Report": "EGR-2025-69-R-XXXX",
+            "Viewpoint": "EGR-2025-69-V-XXXX",
+            "Other": "N/A"
+        },
+        "Pricing Analytics as a Service": {
+            "Report": "EGR-2025-70-R-XXXX",
+            "Viewpoint": "EGR-2025-70-V-XXXX",
+            "Other": "N/A"
+        },
+        "Artificial Intelligence (AI)": {
+            "Report": "EGR-2025-71-R-XXXX",
+            "Viewpoint": "EGR-2025-71-V-XXXX",
+            "Other": "N/A"
+        },
+        "Clinical Development Technology": {
+            "Report": "EGR-2025-72-R-XXXX",
+            "Viewpoint": "EGR-2025-72-V-XXXX",
+            "Other": "N/A"
+        },
+        "Retail and CPG Information Technology": {
+            "Report": "EGR-2025-73-R-XXXX",
+            "Viewpoint": "EGR-2025-73-V-XXXX",
+            "Other": "N/A"
+        },
+        "Sustainability Technology and Services": {
+            "Report": "EGR-2025-74-R-XXXX",
+            "Viewpoint": "EGR-2025-74-V-XXXX",
+            "Other": "N/A"
+        },
+        "Engineering Research and Development": {
+            "Report": "EGR-2025-75-R-XXXX",
+            "Viewpoint": "EGR-2025-75-V-XXXX",
+            "Other": "N/A"
+        },
+        "Software Product Engineering Services": {
+            "Report": "EGR-2025-76-R-XXXX",
+            "Viewpoint": "EGR-2025-76-V-XXXX",
+            "Other": "N/A"
+        },
+        "Forces & Foresight": {
+            "Report": "EGR-2025-77-R-XXXX",
+            "Viewpoint": "EGR-2025-77-V-XXXX",
+            "Other": "N/A"
+        },
+        "Financial Crime and Compliance Operations": {
+            "Report": "EGR-2025-78-R-XXXX",
+            "Viewpoint": "EGR-2025-78-V-XXXX",
+            "Other": "N/A"
+        },
+        "Advanced SciTech": {
+            "Report": "EGR-2025-79-R-XXXX",
+            "Viewpoint": "EGR-2025-79-V-XXXX",
+            "Other": "N/A"
+        }
+            
+        };
+    
+        function updateReferenceNumber() {
+            const product = document.getElementById('product').value;
+            const documentType = document.getElementById('document_type').value;
+            const referenceNumberField = document.getElementById('reference_number');
+    
+            // Generate reference number based on product and document type
+            if (product && documentType && referenceData[product]) {
+                referenceNumberField.value = referenceData[product][documentType] || "N/A";
+            } else {
+                referenceNumberField.value = "";
+            }
+        }
+    
+        // Attach event listeners for dynamic updates
+        document.getElementById('product').addEventListener('change', updateReferenceNumber);
+        document.getElementById('document_type').addEventListener('change', updateReferenceNumber);
+    </script>    
+    
+</body>
+</html>

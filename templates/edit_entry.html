@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Entry</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #ffffff; /* Solid white background */
+            color: #333;
+        }
+
+        .mdl-card {
+            width: 75%; /* Consistent width */
+            max-width: 900px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .mdl-card__title {
+            margin-bottom: 30px;
+            text-align: left; /* Align heading to the left */
+            font-size: 1rem; /* Matched with Add Entry */
+            font-weight: none; /* Unbolded heading */
+            color: #2c3e50;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 0px;
+            padding-left: 10px
+        }
+
+        .field-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .field-container label {
+            flex: 0 0 30%;
+            text-align: left;
+            font-size: 0.9rem; /* Consistent point size */
+            font-weight: bold;
+            color: #555;
+            padding-left: 10px;
+        }
+
+        .field-container input,
+        .field-container select {
+            flex: 1;
+            padding: 10px 15px;
+            font-size: 1rem; /* Consistent point size */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: #fafafa;
+        }
+
+        .field-container input:focus,
+        .field-container select:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+            outline: none;
+        }
+
+        .mdl-button--submit {
+            flex: 1; /* Match input width */
+            padding: 12px 15px; /* Consistent padding */
+            font-size: 1rem; /* Consistent point size */
+            font-weight: 500; /* Normal weight */
+            text-align: center; /* Center text horizontally */
+            line-height: 1.2; /* Adjust vertical alignment */
+            display: flex; /* Enable flex for alignment */
+            justify-content: center; /* Center text horizontally */
+            align-items: center; /* Center text vertically */
+            background:  #2575fc;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            margin-left: auto; /* Align button width */
+            margin-right: auto; /* Center the button */
+            width: 69%;
+            margin-left: 280px;
+        }
+
+        .mdl-button--submit:active {
+            transform: scale(0.98);
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Edit Entry</h2>
+        </div>
+        <form action="/edit/{{ entry.id }}" method="POST">
+            <!-- Product -->
+            <div class="field-container">
+                <label for="product">Product:</label>
+                <input type="text" id="product" name="product" value="{{ entry.product }}" required>
+            </div>
+
+            <!-- Title -->
+            <div class="field-container">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" value="{{ entry.title }}">
+            </div>
+
+            <!-- Document Type -->
+            <div class="field-container">
+                <label for="document_type">Document Type:</label>
+                <input type="text" id="document_type" name="document_type" value="{{ entry.document_type }}">
+            </div>
+
+            <!-- Reference Number -->
+            <div class="field-container">
+                <label for="reference_number">Reference Number:</label>
+                <input type="text" id="reference_number" name="reference_number" value="{{ entry.reference_number }}">
+            </div>
+
+            <!-- Status -->
+            <div class="field-container">
+                <label for="status">Status:</label>
+                <input type="text" id="status" name="status" value="{{ entry.status }}">
+            </div>
+
+            <!-- Number of Pages -->
+            <div class="field-container">
+                <label for="number_of_pages">Number of Pages:</label>
+                <input type="number" id="number_of_pages" name="number_of_pages" value="{{ entry.number_of_pages }}">
+            </div>
+
+            <!-- Date of Publication -->
+            <div class="field-container">
+                <label for="date_of_publication">Date of Publication:</label>
+                <input type="date" id="date_of_publication" name="date_of_publication" value="{{ entry.date_of_publication.strftime('%Y-%m-%d') if entry.date_of_publication }}">
+            </div>
+
+            <!-- Price -->
+            <div class="field-container">
+                <label for="price">Price:</label>
+                <input type="text" id="price" name="price" value="{{ entry.price }}">
+            </div>
+
+            <!-- Date Assigned -->
+            <div class="field-container">
+                <label for="date_assigned">Date Assigned:</label>
+                <input type="date" id="date_assigned" name="date_assigned" value="{{ entry.date_assigned.strftime('%Y-%m-%d') if entry.date_assigned }}">
+            </div>
+
+            <!-- Author/Contact -->
+            <div class="field-container">
+                <label for="author_contact">Author/Contact:</label>
+                <input type="text" id="author_contact" name="author_contact" value="{{ entry.author_contact }}">
+            </div>
+
+            <!-- Purpose -->
+            <div class="field-container">
+                <label for="purpose">Purpose:</label>
+                <input type="text" id="purpose" name="purpose" value="{{ entry.purpose }}">
+            </div>
+
+            <!-- Num -->
+            <div class="field-container">
+                <label for="num">Num:</label>
+                <input type="number" id="num" name="num" value="{{ entry.num }}" required>
+            </div>
+
+            <!-- VA Team Member -->
+            <div class="field-container">
+                <label for="va_team_member">VA Team Member:</label>
+                <input type="text" id="va_team_member" name="va_team_member" value="{{ entry.va_team_member }}">
+            </div>
+
+            <!-- Submit Button -->
+            <div class="button-container">
+                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--submit">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

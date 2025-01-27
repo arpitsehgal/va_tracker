@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f9f9f9, #e0e0e0);
+            color: #333;
+        }
+
+        .upload-container {
+            width: 100%;
+            max-width: 500px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .upload-header {
+            font-size: 1.8rem;
+            font-weight: normal;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            text-align: left; /* Left align the header */
+        }
+
+        .upload-description {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 30px;
+            text-align: left; /* Left align the description */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .form-group input[type="file"] {
+            width: 94%;
+            padding: 12px 15px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: #fafafa;
+            cursor: pointer;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-group input[type="file"]::-webkit-file-upload-button {
+            display: none; /* Remove the default Choose File button */
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Space between buttons */
+        }
+
+        .button {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .button.upload {
+            background: #2575fc;
+        }
+
+    
+
+        .button.delete {
+            background: #ff6b6b;
+        }
+
+        .button.delete:hover {
+            background: #ff4c4c;
+        }
+
+        .button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <div class="upload-header">Upload File</div>
+        <div class="upload-description">Select an Excel file to upload, or delete all entries.</div>
+        <!-- Upload Form -->
+        <form action="/" method="POST" enctype="multipart/form-data" class="form">
+            <div class="form-group">
+                <input type="file" id="file" name="file" required>
+            </div>
+            <button type="submit" class="button upload">Upload</button>
+        </form><br>
+        <!-- Delete All Form -->
+        <form action="/delete_all" method="POST">
+            <button type="submit" class="button delete">Delete All Entries</button>
+        </form>
+    </div>
+</body>
+</html>
